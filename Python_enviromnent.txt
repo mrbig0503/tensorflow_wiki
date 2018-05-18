@@ -1,0 +1,18 @@
+1. Anaconda env
+   source activate my_env
+   source activate tensorflow-gpu
+
+   source deactivate
+
+2. Create anaconda env
+   conda create -n tensorflow-gpu pip python=3.6
+
+3. Remove anaconda env
+   conda env remove --name tensorflow-gpu
+
+4. Virtualenv for tensorflow
+   source ~/Tensorflow/bin/activate
+
+   deactivate
+
+

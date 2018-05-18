@@ -1,0 +1,40 @@
+* Checkpoint
+  - Store model's variables in training stage.
+  - Use tf.save.Saver to store variables
+  - ex. 
+    x = tf.get_variable("x", [1])
+    saver = tf.train.Saver({'x': x})
+    with tf.Session() as sess:
+        sess.run(init)
+        saver.save(sess, './my-model/my-model', global_step=10)
+        
+* Graph
+  - Store model's computational graph.
+  - Use tf.train.write_graph to store graph.
+  - ex.
+    with tf.Session() as sess:
+        tf.train.write_graph(tf.get_default_graph(), "./my-model/", "my-model.pb", as_text=True)
+
+    Note. two formats, txt v.s. binary.
+  - Use tf.import_graph_def() to restore the graph.
+
+* Frozen graph
+  - Freeze the variables to constants in graph, so the inputs are graph and checkpoint.
+  - Use bazel-bin/tensorflow/python/tools/freeze_graph
+  - ex. bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pb --input_checkpoint=model.ckpt-xxx --output_graph=frozen_graph.pb 
+        --output_node_names=output
+
+  - Convert to tflite, use:
+    bazel-bin/tensorflow/contrib/lite/toco/toco --input_file=frozen_graph.ph --output_file=foo.tflite --inference_type=FLOAT --input_shape=1,128,128,3
+    --input_array=input --output_array=output
+
+* Saved model
+  - ex.
+    with tf.Session() as sess:
+        tf.saved_model.simple_save(sess, "./saved_model/", inputs={"a": a}, outputs={"y": y})
+
+  - Convert to tflite, use:
+    bazel-bin/tensorflow/contrib/lite/toco/toco --savedmodel_directory={Saved model folder} --output_file=foo.tflite
+
+
+

@@ -1,0 +1,13 @@
+* Build toco in tensorflow source:
+  ./configure
+  bazel build tensorflow/contrib/lite/toco:toco
+
+* Convert frozen graph to tflite
+  bazel-bin/tensorflow/contrib/lite/toco/toco --input_file=20180402-114759.pb --output_file=test.tflite --input_format=TENSORFLOW_GRAPHDEF --output_format=TFLITE  --input_array=input --output_array=embeddings
+
+* Convert saved model to tflite
+  bazel-bin/tensorflow/contrib/lite/toco/toco --config=opt --savedmodel_directory={saved_model_folder} --output_file=too.lite
+
+
+
+

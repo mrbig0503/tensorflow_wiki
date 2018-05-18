@@ -1,0 +1,25 @@
+* Download cuda and cudnn drivers
+
+* Exit/Start X server
+   sudo service lightdm stop
+   init 3
+
+   sudo service lightdm start
+
+* Install cuda drivers
+
+* Copy cudnn shared libraries to /usr/local/cuda-9.x/lib64
+  Copy cudnn included header to /usr/local/cuda-9.x/include
+
+* sudo apt-get install nvidia-cuda-toolkit
+
+* LD_LIBARAY_PATH=/usr/local/cuda/lib64
+
+* Reboot for /proc/driver/nvidia/version
+
+* Source this environment
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:/usr/lib/nvidia-396
+  export CUDA_HOME=/usr/local/cuda
+  export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.7.0-cp36-cp36m-linux_x86_64.whl
+
+* sudo apt-get install nvidia-modprobe

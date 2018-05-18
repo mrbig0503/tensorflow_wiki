@@ -1,0 +1,9 @@
+1. Build freeze_graph:
+   ./configure
+   bazel build tensorflow/python/tools:freeze_graph
+
+2. Usage:
+   bazel-bin/tensorflow/python/tools:freeze_graph --input_graph=***.pb --input_checkpoint=model.ckpt-1000 --output_graph=frozen_graph.pb --output_node_names=output
+   
+   * if .pbtxt, add --input_binary=false
+   * Note, pb file has two formats, one is txt and another is binary.

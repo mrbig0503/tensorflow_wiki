@@ -1,0 +1,7 @@
+1. Find  tensorflow/tensorflow/python/tools/import_pb_to_tensorboard.py
+
+2. python tensorflow/python/tools/import_pb_to_tensorboard.py \
+     --model_dir=../../FaceRecog/facenet/facenet/models/facenet/20180402-114759/20180402-114759.pb \
+     --log_dir=../../FaceRecog/facenet/facenet/log
+
+

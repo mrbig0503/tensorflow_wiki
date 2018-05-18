@@ -1,0 +1,4 @@
+1. AttributeError: module 'tensorflow.python.saved_model.saved_model' has no attribute 'simple_save'
+  -> pip install --upgrade tensorflow
+
+
