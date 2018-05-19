@@ -7,6 +7,7 @@
     with tf.Session() as sess:
         sess.run(init)
         saver.save(sess, './my-model/my-model', global_step=10)
+
         
 * Graph
   - Store model's computational graph.
@@ -18,6 +19,7 @@
     Note. two formats, txt v.s. binary.
   - Use tf.import_graph_def() to restore the graph.
 
+
 * Frozen graph
   - Freeze the variables to constants in graph, so the inputs are graph and checkpoint.
   - Use bazel-bin/tensorflow/python/tools/freeze_graph
@@ -27,6 +29,11 @@
   - Convert to tflite, use:
     bazel-bin/tensorflow/contrib/lite/toco/toco --input_file=frozen_graph.ph --output_file=foo.tflite --inference_type=FLOAT --input_shape=1,128,128,3
     --input_array=input --output_array=output
+  - Note:
+    1. Convert frozen graph to TFLite format OK, but loading the TFLite model in Android APP has the following error.
+       "Caused by: java.lang.NullPointerException: Internal error: Cannot allocate memory for the interpreter"
+
+
 
 * Saved model
   - ex.
@@ -35,6 +42,7 @@
 
   - Convert to tflite, use:
     bazel-bin/tensorflow/contrib/lite/toco/toco --savedmodel_directory={Saved model folder} --output_file=foo.tflite
-
+  - Note:
+    1. Tensorflow mobile only supports frozen graph, so saved model graph is not usable in TF mobile.
 
 
