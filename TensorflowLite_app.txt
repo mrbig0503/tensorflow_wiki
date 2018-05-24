@@ -1,0 +1,44 @@
+* Now (2018/05/24), the tensorflow lite will use NNAPI if interpreter is created by FILE
+
+For example:
+
+    //tflite = new Interpreter(loadModelFile(activity));
+
+    InputStream inputStream = activity.getAssets().open("mobilenet_quant_v1_224.tflite");
+    File file = createFileFromInputStream(activity, inputStream);
+    if (!file.exists()) {
+      Log.e(TAG, "TED: file not exist");
+    }
+    tflite = new Interpreter(file);
+
+
+  private File createFileFromInputStream(Activity activity, InputStream inputStream) {
+    try {
+      File f = new File(activity.getApplicationContext().getCacheDir(), "test.bin");
+      OutputStream outputStream = new FileOutputStream(f);
+      byte buffer[] = new byte[1024];
+      int len = 0;
+
+      while ((len=inputStream.read(buffer))>0){
+        outputStream.write(buffer,0,len);
+      }
+
+      outputStream.flush();
+
+      outputStream.close();
+      inputStream.close();
+      return f;
+    } catch (IOException e) {
+      Log.e(TAG, "IOE");
+    }
+    return null;
+  }
+
+  private MappedByteBuffer loadModelFile(Activity activity) throws IOException {
+    AssetFileDescriptor fileDescriptor = activity.getAssets().openFd(getModelPath());
+    FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+    FileChannel fileChannel = inputStream.getChannel();
+    long startOffset = fileDescriptor.getStartOffset();
+    long declaredLength = fileDescriptor.getDeclaredLength();
+    return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+  }
