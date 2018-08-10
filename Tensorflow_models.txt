@@ -33,7 +33,13 @@
     1. Convert frozen graph to TFLite format OK, but loading the TFLite model in Android APP has the following error.
        "Caused by: java.lang.NullPointerException: Internal error: Cannot allocate memory for the interpreter"
 
-
+  - Note2:
+    1. Create frozen pb by freeze_graph.py:
+       python freeze_graph.py --input_graph=my-model/my-model.pb --input_checkpoint=my-model/my-model-1 --input_binary=false --output_graph=my-model/my-model_frozen.pb --output_node_names="output0,output1,output2"
+    2. Convert to tflite by toco:
+       toco --input_file=my-model/my-model_frozen.pb --output_file=my-model/my-model.tflite --input_format=TENSORFLOW_GRAPHDEF --output_format=TFLITE --input_arrays=input0,input1,input2 --output_arrays=output0,output1,output2
+    3. Run this tflite in APP failed:
+       java.lang.IllegalArgumentException: Internal error: Failed to run on the given Interpreter: W
 
 * Saved model
   - ex.
