@@ -41,6 +41,10 @@
     3. Run this tflite in APP failed:
        java.lang.IllegalArgumentException: Internal error: Failed to run on the given Interpreter: W
 
+  - Note3:
+    1. Check NNAPI support operations, if there is an op not support, failed log as:
+       illegalArgumentException: Failed to run on the given Interpreter
+
 * Saved model
   - ex.
     with tf.Session() as sess:
