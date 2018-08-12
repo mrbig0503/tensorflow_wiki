@@ -1,5 +1,7 @@
 * Sync tensorflow source
   -> git clone https://github.com/tensorflow/tensorflow.git
+  Update:
+  -> git clone --recurse-submodules https://github.com/tensorflow/tensorflow.git
 
 * configure the build under tensorflow
   -> ./configure
