@@ -34,3 +34,12 @@ android_ndk_repository(
 
 * Building by Bazel is without Tensorflow/TensorflowLite AAR, it use the source code.
   Building by Android Studio is with Tensorflow/TensorflowLite AAR.
+
+
+* As I didn't check other error:
+  "This file requires compiler and library support for the ISO C++ 2011 standard. This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options."
+
+  So, I found that adding '--cxxopt=-std=c++11' to the build statement can fix the error.
+  i.e. bazel build --cxxopt=-std=c++11 -c opt //tensorflow/examples/android:tensorflow_demo
+
+  Finally, build completed successfully.
