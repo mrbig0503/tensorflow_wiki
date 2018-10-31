@@ -1,0 +1,15 @@
+1. In tensorflow/core/user_ops, add [custom_op].cc
+
+2. Flowing the guild : 
+  https://www.tensorflow.org/extend/adding_an_op
+  
+3. Add BUILD under tensorflow/core/user_ops.
+
+4. Build by bazel
+  bazel build [--config opt] //tensorflow/core/user_ops:[custom_op].so
+
+5. Copy the output so to [tf.sysconfig.get_lib()]
+
+6. Test
+  import tensorflow as tf
+  [custom_op] = tf.load_op_library("custom_op.so")
