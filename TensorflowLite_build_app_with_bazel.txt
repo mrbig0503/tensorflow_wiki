@@ -27,6 +27,10 @@ android_ndk_repository(
     # Note that the NDK version is not the API level.
     api_level=14)
 
+* SDK was installed in Android Studio SDK Manager
+* NDK was downloaded from https://developer.android.com/ndk/downloads/older_releases
+  Unzip the folder to SDK/ndk-bundle
+
 
 * Build command:
   -> bazel build --cxxopt=--std=c++11 //tensorflow/contrib/lite/java/demo/app/src/main:TfLiteCameraDemo
@@ -62,3 +66,13 @@ android_ndk_repository(
        bazel-bin/tensorflow/contrib/lite/java/libtensorflowlite_jni.so: 
          ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, stripped
   
+
+* Build Tensorflow lite AAR
+  bazel build  --cxxopt='--std=c++11' -c opt --config=android --cpu=armeabi-v7a //tensorflow/contrib/lite/java:tensorflowlite
+  
+  Note: ERROR: missing input file '@androidsdk//:build-tools/26.0.1/aapt'
+    Check available version in /home/jui/Android/Sdk/build-tools
+    and modify the version in WORKSPACE
+
+  In Android Studio, File -> New -> Import Module, 
+  Choose Import JAR/AAR and find bazel-bin/tensorflow/contrib/lite/java/libtensorflowlite.jar, then Finish
