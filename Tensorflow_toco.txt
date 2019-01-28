@@ -8,6 +8,7 @@
 * Convert saved model to tflite
   bazel-bin/tensorflow/contrib/lite/toco/toco --config=opt --savedmodel_directory={saved_model_folder} --output_file=too.lite
 
-
+* CaffeToTF
+  toco --graph_def_file=RPN_full/RPN_full_227.pb --output_file=RPN_full/RPN_full_227.tflite --input_format=TENSORFLOW_GRAPHDEF --output_format=TFLITE  --input_arrays=data --output_arrays=proposal_cls_score_biasadd,proposal_bbox_pred_biasadd
 
 
